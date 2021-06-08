@@ -47,6 +47,36 @@
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": -2
+    },
+    {
+      "name": "Ethan",
+      "image": "www.yahoo.com",
+      "likes": 0,
+      "id": 9
+    },
+    {
+      "name": "Whatever",
+      "image": "img",
+      "likes": 0,
+      "id": 10
+    },
+    {
+      "name": "Not a thing",
+      "image": "blah blah",
+      "likes": 0,
+      "id": 11
+    },
+    {
+      "name": "new Toy",
+      "image": "lll",
+      "likes": 0,
+      "id": 12
+    },
+    {
+      "name": "Ethan",
+      "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
+      "likes": 0,
+      "id": 13
     }
   ]
 }

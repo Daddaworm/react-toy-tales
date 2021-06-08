@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 import Header from './components/Header'
@@ -6,37 +6,73 @@ import ToyForm from './components/ToyForm'
 import ToyContainer from './components/ToyContainer'
 
 
-class App extends React.Component{
+function App() {
 
-  state = {
-    display: false
+  // state = {
+  //   display: false,
+  //   toyData: []
+  // }
+
+  //This hook is equal to above state
+  const [display, setDisplay] = useState(false)
+
+  //How to set up a hook to replace state and setState
+  const [toyData, setToyData] = useState([])
+
+  useEffect(() => {
+    let URL = 'http://localhost:3000/toys'
+    fetch(URL)
+    .then(resp => resp.json())
+    .then(data => setToyData(data))
+  }, [])
+
+  const addNewToy = (name, image) => {
+    console.log(name, image)
+    // build your Data object
+    const newToy = {
+      name: name,
+      image: image,
+      likes: 0,
+    }
+    // build config object and pass Data object
+    const configObj = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(newToy)
+    }
+    
+      let URL = 'http://localhost:3000/toys'
+      fetch(URL, configObj)
+      .then(resp => resp.json())
+      .then(data => setToyData(prevState => [...prevState, data ]))
   }
 
-  handleClick = () => {
-    let newBoolean = !this.state.display
-    this.setState({
-      display: newBoolean
-    })
+
+
+  const handleClick = () => {
+    let newBoolean = !display
+    setDisplay(newBoolean)
   }
 
-  render(){
+  
     return (
       <>
         <Header/>
-        { this.state.display
+        {display
             ?
-          <ToyForm/>
+          <ToyForm addToy={addNewToy}/>
             :
           null
         }
         <div className="buttonContainer">
-          <button onClick={this.handleClick}> Add a Toy </button>
+          <button onClick={handleClick}> Add a Toy </button>
         </div>
-        <ToyContainer/>
+        <ToyContainer toyData={toyData} />
       </>
     );
-  }
-
 }
 
 export default App;

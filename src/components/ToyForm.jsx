@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 
 class ToyForm extends Component {
-
+  handleSubmit = (e) => {
+    e.preventDefault()
+    // console.log(e.target.name, e.target.image)
+    const name = e.target.name.value
+    const image = e.target.image.value
+    this.props.addToy(name, image)
+  }
   render() {
     return (
       <div className="container">
-        <form className="add-toy-form">
+        <form onSubmit={this.handleSubmit} className="add-toy-form">
           <h3>Create a toy!</h3>
           <input type="text" name="name" placeholder="Enter a toy's name..." className="input-text"/>
           <br/>
@@ -20,3 +26,6 @@ class ToyForm extends Component {
 }
 
 export default ToyForm;
+
+
+
